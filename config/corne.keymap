@@ -9,60 +9,63 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    keymap {
-        compatible = "zmk,keymap";
+        keymap {
+                compatible = "zmk,keymap";
 
-        default_layer {
-            bindings = <
-                // Layer 0
-                &kp TAB &kp Q &kp W &kp E &kp R &kp T      &kp ESC &kp A &kp S &kp D &kp F &kp G
-                &mo 2 &kp Z &kp X &kp C &kp V &kp B         &kp_NO &kp_NO &kp_NO &kp_LALT &kp_SPC &mo 1
-                &kp BSPC &kp P &kp O &kp I &kp U &kp Y     &kp_QUOT &kp_SCLN &kp L &kp K &kp J &kp H
-                &kp_ENT &kp_SLSH &kp_DOT &kp_COMM &kp M &kp N
-                &kp_NO &kp_NO &kp_NO &kp_RCTL &kp_RSFT &kp_RGUI
-            >;
-        };
+                default_layer {
+// -----------------------------------------------------------------------------------------
+// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
+// |  ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
+// | MO2  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ENT  |
+//                    | ALT | SPC | MO1 |   | GUI | SHFT | CTL |
+                        bindings = <
+   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
+   &kp ESC   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+   &mo 2     &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
+                  &kp LALT &kp SPACE &mo 1   &kp RGUI &kp RSHFT &kp RCTRL
+                        >;
+                };
 
-        layer_1 {
-            bindings = <
-                // Layer 1
-                &kp_GRV &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-                &kp_TRNS &kp_1 &kp_2 &kp_3 &kp_4 &kp_5
-                &kp_TRNS &kp_BSLS &kp_DEL &kp_CAPS &kp_NO &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_TRNS &kp_TRNS
-                &kp_TRNS &kp_TRNS &kp_RBRC &kp_LBRC &kp_EQL &kp_MINS
-                &kp_NO &kp_TRNS &kp_0 &kp_9 &kp_8 &kp_7
-                &kp_6 &kp_TRNS &kp_TRNS &kp_TRNS &kp_TRNS &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_TRNS
-            >;
-        };
+                lower_layer {
+// -----------------------------------------------------------------------------------------
+// | TRNS |  `  |     |     |     |     |   |     |  -  |  =  |  [  |  ]  | TRNS |
+// | TRNS |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | TRNS |
+// | TRNS |  \  | DEL |CAPS |     |     |   |     |     | TRNS| TRNS| TRNS| TRNS |
+//                    | TRNS| TRNS| #### |   | TRNS| TRNS| TRNS|
+                        bindings = <
+   &trans    &kp GRAVE &none    &none     &none &none   &none &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &trans
+   &trans    &kp N1    &kp N2   &kp N3    &kp N4 &kp N5   &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans
+   &mo 3     &kp BSLH  &kp DEL  &kp CAPS  &none &none   &none &none &trans &trans &trans &trans
+                              &trans &trans &trans   &trans &trans &trans
+                        >;
+                };
 
-        layer_2 {
-            bindings = <
-                // Layer 2
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-                &kp_NO &kp_F5 &kp_F6 &kp_F7 &kp_F8 &kp_NO
-                &kp_NO &kp_F9 &kp_F10 &kp_F11 &kp_F12 &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_TRNS
-                &kp_TRNS &kp_TRNS &kp_HOME &kp_PGUP &kp_NO &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-                &kp_RGHT &kp_UP &kp_DOWN &kp_LEFT &kp_END &kp_F4
-                &kp_F3 &kp_F2 &kp_F1 &kp_PGDN &kp_NO &kp_NO
-                &kp_NO &kp_TRNS &kp_TRNS &kp_TRNS
-            >;
-        };
+                raise_layer {
+// -----------------------------------------------------------------------------------------
+// |      |     |     |     |     |     |   |     |     |     |     |PGUP | HOME |
+// |      |     |  F5 |  F6 |  F7 |  F8 |   | LFT | DWN | UP  | RGT |     |  END |
+// | #### |     |  F9 | F10 | F11 | F12 |   |PGDN |  F1 |  F2 |  F3 |  F4 |      |
+//                    | TRNS| TRNS| MO3 |   | TRNS| TRNS| TRNS|
+                        bindings = <
+   &none     &none &none  &none   &none   &none    &none     &none    &none    &none     &kp PG_UP &kp HOME
+   &none     &none &kp F5 &kp F6  &kp F7  &kp F8   &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &none     &kp END
+   &trans    &none &kp F9 &kp F10 &kp F11 &kp F12  &kp PG_DN &kp F1   &kp F2   &kp F3    &kp F4    &none
+                              &trans &trans &mo 3   &trans &trans &trans
+                        >;
+                };
 
-        layer_3 {
-            bindings = <
-                // Layer 3 (media)
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-                &kp_NO &kp_MUTE &kp_MPRV &kp_NO &kp_NO &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-                &kp_MFFD &kp_VOLU &kp_VOLD &kp_MRWD &kp_MPLY &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_MNXT &kp_NO
-                &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO &kp_NO
-            >;
+                media_layer {
+// -----------------------------------------------------------------------------------------
+// |      |     |     |     |     |     |   |     |     |     |     |PREV | MUTE |
+// |      |     |     |     |     |     |   | RWD | VOLD| VOLU| FFD |     | PLAY |
+// |      |     |     |     |     |     |   | NEXT|     |     |     |     |      |
+//                    |     |     | ####|   |     |     |     |
+                        bindings = <
+   &none     &none &none &none &none &none   &none       &none        &none        &none    &kp C_PREV &kp C_MUTE
+   &none     &none &none &none &none &none   &kp C_RW    &kp C_VOL_DN &kp C_VOL_UP &kp C_FF &none      &kp C_PP
+   &none     &none &none &none &none &none   &kp C_NEXT  &none        &none        &none    &none      &none
+                              &none &none &trans   &none &none &none
+                        >;
+                };
         };
-    };
 };
