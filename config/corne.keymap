@@ -9,6 +9,7 @@
 
 / {
         behaviors {
+            // Tap dance: tap = one-shot, double-tap = toggle
             td_num: tap_dance_num {
                 compatible = "zmk,behavior-tap-dance";
                 #binding-cells = <0>;
@@ -29,12 +30,40 @@
                 tapping-term-ms = <250>;
                 bindings = <&sl MEDIA>, <&tog MEDIA>;
             };
+
+            // Hold-tap wrapper: hold = momentary, tap = tap-dance (one-shot/toggle)
+            lt_num: layer_tap_num {
+                compatible = "zmk,behavior-hold-tap";
+                #binding-cells = <2>;
+                flavor = "balanced";
+                tapping-term-ms = <200>;
+                quick-tap-ms = <175>;
+                bindings = <&mo>, <&td_num>;
+            };
+
+            lt_fn: layer_tap_fn {
+                compatible = "zmk,behavior-hold-tap";
+                #binding-cells = <2>;
+                flavor = "balanced";
+                tapping-term-ms = <200>;
+                quick-tap-ms = <175>;
+                bindings = <&mo>, <&td_fn>;
+            };
+
+            lt_media: layer_tap_media {
+                compatible = "zmk,behavior-hold-tap";
+                #binding-cells = <2>;
+                flavor = "balanced";
+                tapping-term-ms = <200>;
+                quick-tap-ms = <175>;
+                bindings = <&mo>, <&td_media>;
+            };
     
             esc_panic: esc_panic {
                 compatible = "zmk,behavior-macro";
                 #binding-cells = <0>;
                 label = "ESC_PANIC";
-                bindings = <&kp ESC>, <&to BASE>;
+                bindings = <&kp ESC>, <&to 0>;
             };
         };
 
@@ -46,13 +75,14 @@
 // -----------------------------------------------------------------------------------------
 // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
 // |  ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | TD_NUM|  Z |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ENT  |
-//                    | ALT | SPC | TD_FN|   | GUI | SHFT | CTL |
+// | NUM* |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ENT  |
+//                    | ALT | SPC | FN*  |   | GUI | SHFT | CTL |
+// * = tap/hold/double-tap layer key
                         bindings = <
    &kp TAB      &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
    &esc_panic   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &td_num      &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
-                             &kp LALT &kp SPACE &td_fn   &kp RGUI &kp RSHFT &kp RCTRL
+   &lt_num NUM 0     &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
+                             &kp LALT &kp SPACE &lt_fn FN_NAV 0   &kp RGUI &kp RSHFT &kp RCTRL
                         >;
                 };
                 
@@ -61,13 +91,13 @@
 // -----------------------------------------------------------------------------------------
 // | TRNS |  `  |     |     |     |     |   |     |  -  |  =  |  [  |  ]  | TRNS |
 // | TRNS |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | TRNS |
-// |TD_MEDIA| \  | DEL |CAPS |     |     |   |     |     | TRNS| TRNS| TRNS| TRNS |
-//                    | TRNS| TRNS| TRNS |   | TRNS| TRNS| TRNS|
+// | #### |  \  | DEL |CAPS |     |     |   |     |     | TRNS| TRNS| TRNS| TRNS |
+//                    | TRNS| TRNS|MEDIA*|   | TRNS| TRNS| TRNS|
                         bindings = <
    &trans     &kp GRAVE &none    &none     &none &none   &none &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &trans
    &trans     &kp N1    &kp N2   &kp N3    &kp N4 &kp N5   &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans
-   &td_media  &kp BSLH  &kp DEL  &kp CAPS  &none &none   &none &none &trans &trans &trans &trans
-                                  &trans &trans &trans   &trans &trans &trans
+   &trans     &kp BSLH  &kp DEL  &kp CAPS  &none &none   &none &none &trans &trans &trans &trans
+                                  &trans &trans &lt_media MEDIA 0   &trans &trans &trans
                         >;
                 };
                 
@@ -76,12 +106,12 @@
 // -----------------------------------------------------------------------------------------
 // |      |     |     |     |     |     |   |     |     |     |     |PGUP | HOME |
 // |      |     |  F5 |  F6 |  F7 |  F8 |   | LFT | DWN | UP  | RGT |     |  END |
-// |TD_MEDIA|   |  F9 | F10 | F11 | F12 |   |PGDN |  F1 |  F2 |  F3 |  F4 |      |
-//                    | TRNS| TRNS| TRNS |   | TRNS| TRNS| TRNS|
+// |MEDIA*|     |  F9 | F10 | F11 | F12 |   |PGDN |  F1 |  F2 |  F3 |  F4 |      |
+//                    | TRNS| TRNS| #### |   | TRNS| TRNS| TRNS|
                         bindings = <
-   &none      &none &none  &none   &none   &none    &none     &none    &none    &none     &kp PG_UP &kp HOME
-   &none      &none &kp F5 &kp F6  &kp F7  &kp F8   &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &none     &kp END
-   &td_media  &none &kp F9 &kp F10 &kp F11 &kp F12  &kp PG_DN &kp F1   &kp F2   &kp F3    &kp F4    &none
+   &none            &none &none  &none   &none   &none    &none     &none    &none    &none     &kp PG_UP &kp HOME
+   &none            &none &kp F5 &kp F6  &kp F7  &kp F8   &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &none     &kp END
+   &lt_media MEDIA 0     &none &kp F9 &kp F10 &kp F11 &kp F12  &kp PG_DN &kp F1   &kp F2   &kp F3    &kp F4    &none
                                    &trans &trans &trans   &trans &trans &trans
                         >;
                 };
@@ -91,12 +121,12 @@
 // -----------------------------------------------------------------------------------------
 // |BTCLR | BT0 | BT1 | BT2 | BT3 | BT4 |   |     |     |     |     |PREV | MUTE |
 // |      |     |     |     |     |     |   | RWD | VOLD| VOLU| FFD |     | PLAY |
-// |      |     |     |     |     |     |   | NEXT|     |     |     |     |      |
+// | #### |     |     |     |     |     |   | NEXT|     |     |     |     |      |
 //                    |     |     |     |   |     |     |     |
                         bindings = <
    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &none       &none        &none        &none    &kp C_PREV &kp C_MUTE
    &none      &none        &none        &none        &none        &none          &kp C_RW    &kp C_VOL_DN &kp C_VOL_UP &kp C_FF &none      &kp C_PP
-   &none      &none        &none        &none        &none        &none          &kp C_NEXT  &none        &none        &none    &none      &none
+   &trans     &none        &none        &none        &none        &none          &kp C_NEXT  &none        &none        &none    &none      &none
                                         &none &none &none   &none &none &none
                         >;
                 };
