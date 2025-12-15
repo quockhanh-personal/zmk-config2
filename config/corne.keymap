@@ -9,56 +9,7 @@
 
 / {
         behaviors {
-            // Tap dance: tap = one-shot, double-tap = toggle
-            td_num: tap_dance_num {
-                compatible = "zmk,behavior-tap-dance";
-                #binding-cells = <0>;
-                tapping-term-ms = <250>;
-                bindings = <&sl NUM>, <&tog NUM>;
-            };
-    
-            td_fn: tap_dance_fn {
-                compatible = "zmk,behavior-tap-dance";
-                #binding-cells = <0>;
-                tapping-term-ms = <250>;
-                bindings = <&sl FN_NAV>, <&tog FN_NAV>;
-            };
-    
-            td_media: tap_dance_media {
-                compatible = "zmk,behavior-tap-dance";
-                #binding-cells = <0>;
-                tapping-term-ms = <250>;
-                bindings = <&sl MEDIA>, <&tog MEDIA>;
-            };
-
-            // Hold-tap wrapper: hold = momentary, tap = tap-dance (one-shot/toggle)
-            lt_num: layer_tap_num {
-                compatible = "zmk,behavior-hold-tap";
-                #binding-cells = <2>;
-                flavor = "balanced";
-                tapping-term-ms = <200>;
-                quick-tap-ms = <175>;
-                bindings = <&mo>, <&td_num>;
-            };
-
-            lt_fn: layer_tap_fn {
-                compatible = "zmk,behavior-hold-tap";
-                #binding-cells = <2>;
-                flavor = "balanced";
-                tapping-term-ms = <200>;
-                quick-tap-ms = <175>;
-                bindings = <&mo>, <&td_fn>;
-            };
-
-            lt_media: layer_tap_media {
-                compatible = "zmk,behavior-hold-tap";
-                #binding-cells = <2>;
-                flavor = "balanced";
-                tapping-term-ms = <200>;
-                quick-tap-ms = <175>;
-                bindings = <&mo>, <&td_media>;
-            };
-    
+            // ESC panic: press ESC and return to BASE layer
             esc_panic: esc_panic {
                 compatible = "zmk,behavior-macro";
                 #binding-cells = <0>;
@@ -77,12 +28,12 @@
 // |  ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
 // | NUM* |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ENT  |
 //                    | ALT | SPC | FN*  |   | GUI | SHFT | CTL |
-// * = tap/hold/double-tap layer key
+// * = tap: one-shot, hold: momentary
                         bindings = <
    &kp TAB      &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
    &esc_panic   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &lt_num NUM 0     &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
-                             &kp LALT &kp SPACE &lt_fn FN_NAV 0   &kp RGUI &kp RSHFT &kp RCTRL
+   &lt NUM NUM       &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
+                             &kp LALT &kp SPACE &lt FN_NAV FN_NAV   &kp RGUI &kp RSHFT &kp RCTRL
                         >;
                 };
                 
@@ -97,7 +48,7 @@
    &trans     &kp GRAVE &none    &none     &none &none   &none &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &trans
    &trans     &kp N1    &kp N2   &kp N3    &kp N4 &kp N5   &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans
    &trans     &kp BSLH  &kp DEL  &kp CAPS  &none &none   &none &none &trans &trans &trans &trans
-                                  &trans &trans &lt_media MEDIA 0   &trans &trans &trans
+                                  &trans &trans &lt MEDIA MEDIA   &trans &trans &trans
                         >;
                 };
                 
@@ -111,7 +62,7 @@
                         bindings = <
    &none            &none &none  &none   &none   &none    &none     &none    &none    &none     &kp PG_UP &kp HOME
    &none            &none &kp F5 &kp F6  &kp F7  &kp F8   &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &none     &kp END
-   &lt_media MEDIA 0     &none &kp F9 &kp F10 &kp F11 &kp F12  &kp PG_DN &kp F1   &kp F2   &kp F3    &kp F4    &none
+   &lt MEDIA MEDIA       &none &kp F9 &kp F10 &kp F11 &kp F12  &kp PG_DN &kp F1   &kp F2   &kp F3    &kp F4    &none
                                    &trans &trans &trans   &trans &trans &trans
                         >;
                 };
