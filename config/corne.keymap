@@ -8,52 +8,54 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    behaviors {
-        td_num: tap_dance_num {
-            compatible = "zmk,behavior-tap-dance";
-            tapping-term-ms = <250>;
-            bindings = <
-                &sl NUM     // tap 1 lần → one-shot NUM
-                &tog NUM    // double tap → lock / unlock NUM
-            >;
+        behaviors {
+            td_num: tap_dance_num {
+                compatible = "zmk,behavior-tap-dance";
+                #binding-cells = <0>;
+                tapping-term-ms = <250>;
+                bindings = <
+                    &sl NUM     // tap 1 lần → one-shot NUM
+                    &tog NUM    // double tap → lock / unlock NUM
+                >;
+            };
+    
+            td_fn: tap_dance_fn {
+                compatible = "zmk,behavior-tap-dance";
+                #binding-cells = <0>;
+                tapping-term-ms = <250>;
+                bindings = <
+                    &sl FN_NAV
+                    &tog FN_NAV
+                >;
+            };
+    
+            td_media: tap_dance_media {
+                compatible = "zmk,behavior-tap-dance";
+                #binding-cells = <0>;
+                tapping-term-ms = <250>;
+                bindings = <
+                    &sl MEDIA
+                    &tog MEDIA
+                >;
+            };
+    
+            esc_panic: esc_panic {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                label = "ESC_PANIC";
+                #binding-cells = <0>;
+            
+                bindings = <
+                    &kp ESC
+                    &to BASE
+                >;
+            };
         };
 
-        td_fn: tap_dance_fn {
-            compatible = "zmk,behavior-tap-dance";
-            tapping-term-ms = <250>;
-            bindings = <
-                &sl "FN_NAV"
-                &tog "FN_NAV"
-            >;
-        };
-
-        td_media: tap_dance_media {
-            compatible = "zmk,behavior-tap-dance";
-            tapping-term-ms = <250>;
-            bindings = <
-                &sl MEDIA
-                &tog MEDIA
-            >;
-        };
-
-        esc_panic: esc_panic {
-            compatible = "zmk,behavior-macro";
-            label = "ESC_PANIC";
-            #binding-cells = <0>;
-        
-            bindings = <
-                &kp ESC
-                &to BASE
-            >;
-        };
-    };
-};
-
-/ {
         keymap {
                 compatible = "zmk,keymap";
                 default_layer {
-                label = "BASE";
+                label = BASE;
 // -----------------------------------------------------------------------------------------
 // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
 // |  ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
@@ -67,7 +69,7 @@
                         >;
                 };
                 lower_layer {
-                label = "NUM";
+                label = NUM;
 // -----------------------------------------------------------------------------------------
 // | TRNS |  `  |     |     |     |     |   |     |  -  |  =  |  [  |  ]  | TRNS |
 // | TRNS |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | TRNS |
@@ -81,7 +83,7 @@
                         >;
                 };
                 raise_layer {
-                label = "FN_NAV";
+                label = FN_NAV;
 // -----------------------------------------------------------------------------------------
 // |      |     |     |     |     |     |   |     |     |     |     |PGUP | HOME |
 // |      |     |  F5 |  F6 |  F7 |  F8 |   | LFT | DWN | UP  | RGT |     |  END |
@@ -95,7 +97,7 @@
                         >;
                 };
                 media_layer {
-                label = "MEDIA";
+                label = MEDIA
 // -----------------------------------------------------------------------------------------
 // |BTCLR | BT0 | BT1 | BT2 | BT3 | BT4 |   |     |     |     |     |PREV | MUTE |
 // |      |     |     |     |     |     |   | RWD | VOLD| VOLU| FFD |     | PLAY |
