@@ -8,6 +8,48 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+    behaviors {
+        td_num: tap_dance_num {
+            compatible = "zmk,behavior-tap-dance";
+            tapping-term-ms = <250>;
+            bindings = <
+                &sl NUM     // tap 1 lần → one-shot NUM
+                &tog NUM    // double tap → lock / unlock NUM
+            >;
+        };
+
+        td_fn: tap_dance_fn {
+            compatible = "zmk,behavior-tap-dance";
+            tapping-term-ms = <250>;
+            bindings = <
+                &sl "FN + NAV"
+                &tog "FN + NAV"
+            >;
+        };
+
+        td_media: tap_dance_media {
+            compatible = "zmk,behavior-tap-dance";
+            tapping-term-ms = <250>;
+            bindings = <
+                &sl MEDIA
+                &tog MEDIA
+            >;
+        };
+
+        esc_panic: esc_panic {
+            compatible = "zmk,behavior-macro";
+            label = "ESC_PANIC";
+            #binding-cells = <0>;
+        
+            bindings = <
+                &kp ESC
+                &to BASE
+            >;
+        };
+    };
+};
+
+/ {
         keymap {
                 compatible = "zmk,keymap";
                 default_layer {
@@ -19,9 +61,9 @@
 //                    | ALT | SPC | MO1 |   | GUI | SHFT | CTL |
                         bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp ESC   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &mo 2     &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
-                  &kp LALT &kp SPACE &mo 1   &kp RGUI &kp RSHFT &kp RCTRL
+   &esc_panic   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+   &lt NUM &td_num     &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RET
+                  &kp LALT &kp SPACE &lt "FN + NAV" &td_fn   &kp RGUI &kp RSHFT &kp RCTRL
                         >;
                 };
                 lower_layer {
@@ -34,7 +76,7 @@
                         bindings = <
    &trans    &kp GRAVE &none    &none     &none &none   &none &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &trans
    &trans    &kp N1    &kp N2   &kp N3    &kp N4 &kp N5   &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans
-   &mo 3     &kp BSLH  &kp DEL  &kp CAPS  &none &none   &none &none &trans &trans &trans &trans
+   &lt MEDIA &td_media     &kp BSLH  &kp DEL  &kp CAPS  &none &none   &none &none &trans &trans &trans &trans
                               &trans &trans &trans   &trans &trans &trans
                         >;
                 };
@@ -49,7 +91,7 @@
    &none     &none &none  &none   &none   &none    &none     &none    &none    &none     &kp PG_UP &kp HOME
    &none     &none &kp F5 &kp F6  &kp F7  &kp F8   &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &none     &kp END
    &trans    &none &kp F9 &kp F10 &kp F11 &kp F12  &kp PG_DN &kp F1   &kp F2   &kp F3    &kp F4    &none
-                              &trans &trans &mo 3   &trans &trans &trans
+                              &trans &trans &lt MEDIA &td_media   &trans &trans &trans
                         >;
                 };
                 media_layer {
