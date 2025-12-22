@@ -75,19 +75,19 @@
                                                        &trans   &ht_layer 3 3 &trans            &trans    &trans    &trans
                         >;
                 };
-                media_layer {
-                        label = "MEDIA";
+                symbol_layer {
+                        label = "SYMBOL";
 // -----------------------------------------------------------------------------------------
-// |BTCLR | BT0 | BT1 | BT2 | BT3 | BT4 |   |     |     |     |     |PREV | MUTE |
-// |      |     |     |     |     |     |   | RWD | VOLD| VOLU| FFD |     | PLAY |
-// |      |     |     |     |     |     |   | NEXT|     |     |     |     |      |
+// | BT1 |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  ?  |  '  |BTCLR |
+// | BT2 |  +  |  =  |  (  |  )  |  "  |   |  :  |  ]  |  [  |  }  |  {  |      |
+// | BT3 |  <  |  |  |  -  |  >  |  \  |   |  `  |  _  |  /  |  ~  |  ;  |      |
 //                    |     | ####|     |   |     |     |     |
 
                         bindings = <
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &none     &none     &none     &none     &kp C_PREV &kp C_MUTE
-                                &none      &none        &none        &none        &none        &none         &kp C_RW  &kp C_VOL_DN &kp C_VOL_UP &kp C_FF &none      &kp C_PP
-                                &none      &none        &none        &none        &none        &none         &kp C_NEXT &none     &none     &none     &none      &none
-                                                       &none         &trans       &none                      &none     &none     &none
+                                &bt BT_SEL 0 &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET &kp AMPS  &kp ASTRK &kp QMARK &kp SQT   &bt BT_CLR
+                                &bt BT_SEL 1 &kp PLUS  &kp EQUAL &kp LPAR  &kp RPAR  &kp DQT      &kp COLON &kp RBKT  &kp LBKT  &kp RBRC  &kp LBRC  &none
+                                &bt BT_SEL 2 &kp LT    &kp PIPE  &kp MINUS &kp GT    &kp BSLH     &kp GRAVE &kp UNDER &kp FSLH  &kp TILDE &kp SEMI  &none
+                                                       &none     &trans    &none                  &none     &none     &none
                         >;
                 };
         };
