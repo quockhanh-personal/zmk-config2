@@ -27,6 +27,16 @@
             quick-tap-ms = <150>;
             bindings = <&mo>, <&sl>;
         };
+
+        // Hold-tap behavior for Tab: tap = TAB, hold = activate NUM layer (layer 1)
+        ht_tab: hold_tap_tab {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     keymap {
@@ -44,7 +54,7 @@
             //                                 │  ALT     │  GUI     │  SPACE   │   │  BSPC    │  OSL1    │  OSL2    │
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
             bindings = <
-                &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P      &kp RCTRL
+                &ht_tab 1 TAB    &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P      &kp RCTRL
                 &kp ESC    &kp A      &kp S      &kp D      &kp F      &kp G          &kp H      &kp J      &kp K      &kp L      &kp SEMI   &kp SQT
                 &kp RSHFT  &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH   &kp RET
                                                  &kp LALT   &kp RGUI   &kp SPACE      &kp BSPC  &ht_layer 1 1  &ht_layer 2 2
