@@ -153,10 +153,10 @@
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
 
             bindings = <
-&trans  &kp N1     &kp N2  &kp N3  &kp N4  &kp N5       &kp N6          &kp N7          &kp N8         &kp N9     &kp N0  &trans
-&trans  &kp GRAVE  &none   &none   &none   &none        &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW   &kp RIGHT  &none   &trans
-&trans  &kp BSLH   &none   &none   &none   &kp MINUS    &kp EQUAL       &none           &trans         &trans     &trans  &trans
-                           &trans  &trans  &trans       &kp DEL         &trans          &ht_layer 3 3
+&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6          &kp N7          &kp N8         &kp N9     &kp N0  &trans
+&trans  &none   &none   &none   &none   &none     &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW   &kp RIGHT  &none   &trans
+&trans  &none   &none   &none   &none   &none     &none           &none           &trans         &trans     &trans  &trans
+                        &trans  &trans  &trans    &kp DEL         &trans          &ht_layer 3 3
             >;
         };
 
@@ -174,10 +174,10 @@
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
 
             bindings = <
-&none  &kp EXCL  &kp AT     &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS       &kp ASTRK  &kp QMARK  &kp SQT   &none
-&none  &kp PLUS  &kp EQUAL  &kp LPAR   &kp RPAR  &kp DQT      &kp COLON  &kp RBKT       &kp LBKT   &kp RBRC   &kp LBRC  &none
-&none  &kp LT    &kp PIPE   &kp MINUS  &kp GT    &kp BSLH     &kp GRAVE  &kp UNDER      &kp FSLH   &kp TILDE  &kp SEMI  &none
-                            &trans     &trans    &trans       &trans     &ht_layer 3 3  &trans
+&none  &kp EXCL       &kp AT  &kp HASH  &kp DLLR      &kp PRCNT           &kp CARET  &kp AMPS       &kp ASTRK  &kp QMARK  &kp SQT  &none
+&none  &kp GRAVE      &none   &none     &kp KP_MINUS  &kp UNDER           &kp PLUS   &kp KP_EQUAL   &none      &none      &none    &none
+&none  &kp BACKSLASH  &none   &none     &kp PIPE      &kp GREATER_THAN    &none      &none          &none      &none      &none    &none
+                              &trans    &trans        &trans              &trans     &ht_layer 3 3  &trans
             >;
         };
 
@@ -195,10 +195,10 @@
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
 
             bindings = <
-&none   &kp F1      &kp F2        &kp F3        &kp F4        &kp F5          &kp F6     &kp F7    &kp F8  &kp F9     &kp F10  &kp HOME
-&none   &kp F11     &kp F12       &none         &none         &none           &kp LEFT   &kp DOWN  &kp UP  &kp RIGHT  &none    &kp END
-&trans  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3    &kp PG_DN  &none     &none   &none      &none    &none
-                                  &trans        &trans        &trans          &trans     &none     &none
+&none   &kp F1      &kp F2        &kp F3        &kp F4           &kp F5              &kp F6    &kp F7    &kp F8  &kp F9     &kp F10  &none
+&none   &kp F11     &kp F12       &kp C_VOL_DN  &kp C_VOLUME_UP  &kp K_PLAY_PAUSE    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none    &none
+&trans  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2     &bt BT_SEL 3        &none     &none     &none   &none      &none    &none
+                                  &trans        &trans           &trans              &trans    &none     &none
             >;
         };
     };
