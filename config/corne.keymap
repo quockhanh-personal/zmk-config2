@@ -113,6 +113,26 @@
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <30 31>;
         };
+
+        minus {
+            bindings = <&kp MINUS>;
+            key-positions = <15 16>;
+        };
+
+        underscore {
+            bindings = <&kp UNDERSCORE>;
+            key-positions = <3 4>;
+        };
+
+        equal {
+            bindings = <&kp EQUAL>;
+            key-positions = <19 20>;
+        };
+
+        plus {
+            bindings = <&kp PLUS>;
+            key-positions = <7 8>;
+        };
     };
 
     keymap {
@@ -174,10 +194,10 @@
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
 
             bindings = <
-&none  &kp EXCL       &kp AT  &kp HASH  &kp DLLR   &kp PRCNT           &kp CARET  &kp AMPS       &kp ASTRK  &kp QMARK  &kp SQT  &trans
-&none  &kp GRAVE      &none   &none     &kp MINUS  &kp UNDER           &kp PLUS   &kp EQUAL      &none      &none      &none    &none
-&none  &kp BACKSLASH  &none   &none     &kp PIPE   &kp GREATER_THAN    &none      &none          &none      &none      &none    &none
-                              &trans    &trans     &trans              &trans     &ht_layer 3 3  &trans
+&none   &kp EXCL       &kp AT  &kp HASH  &kp DLLR   &kp PRCNT           &kp CARET  &kp AMPS       &kp ASTRK  &kp QMARK  &kp SQT  &trans
+&none   &kp GRAVE      &none   &none     &kp MINUS  &kp UNDER           &kp PLUS   &kp EQUAL      &none      &none      &none    &none
+&trans  &kp BACKSLASH  &none   &none     &kp PIPE   &kp GREATER_THAN    &none      &none          &none      &none      &none    &none
+                               &trans    &trans     &trans              &trans     &ht_layer 3 3  &trans
             >;
         };
 
