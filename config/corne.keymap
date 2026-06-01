@@ -79,6 +79,16 @@
             flavor = "tap-preferred";
             hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41>;
         };
+
+        hold_prefer: hold_prefer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOLD_PREFER";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            hold-while-undecided;
+        };
     };
 
     combos {
@@ -152,10 +162,10 @@
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
 
             bindings = <
-&ht_tab 1 TAB  &long_press LG(GRAVE) Q  &kp W  &kp E                &kp R                               &kp T        &kp Y     &kp U          &kp I          &kp O    &kp P     &kp RCTRL
-&kp ESC        &kp A                    &kp S  &kp D                &kp F                               &kp G        &kp H     &kp J          &kp K          &kp L    &kp SEMI  &kp SQT
-&kp RSHFT      &kp Z                    &kp X  &long_press LG(C) C  &long_press LG(V) V                 &kp B        &kp N     &kp M          &kp COMMA      &kp DOT  &kp FSLH  &kp RET
-                                               &kp LALT             &hmr_l LEFT_COMMAND LC(LEFT_SHIFT)  &kp SPACE    &kp BSPC  &ht_layer 1 1  &ht_layer 2 2
+&ht_tab 1 TAB  &long_press LG(GRAVE) Q  &kp W  &kp E                &kp R                                     &kp T        &kp Y     &kp U          &kp I          &kp O    &kp P     &kp RCTRL
+&kp ESC        &kp A                    &kp S  &kp D                &kp F                                     &kp G        &kp H     &kp J          &kp K          &kp L    &kp SEMI  &kp SQT
+&kp RSHFT      &kp Z                    &kp X  &long_press LG(C) C  &long_press LG(V) V                       &kp B        &kp N     &kp M          &kp COMMA      &kp DOT  &kp FSLH  &kp RET
+                                               &kp LALT             &hold_prefer LEFT_COMMAND LS(LEFT_SHIFT)  &kp SPACE    &kp BSPC  &ht_layer 1 1  &ht_layer 2 2
             >;
         };
 
